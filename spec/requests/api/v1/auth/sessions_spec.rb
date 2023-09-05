@@ -1,4 +1,5 @@
 require 'swagger_helper'
+JSON_CONTENT_TYPE = 'application/json'
 
 RSpec.describe 'api/v1/auth/sessions', type: :request do
 
@@ -8,7 +9,7 @@ RSpec.describe 'api/v1/auth/sessions', type: :request do
 
     post('create session upon login') do
       response(200, 'successful') do
-        consumes 'application/json'
+        consumes JSON_CONTENT_TYPE
         parameter name: :user, in: :body, schema: {
           type: :object,
           properties: {
@@ -19,7 +20,7 @@ RSpec.describe 'api/v1/auth/sessions', type: :request do
         }
         after do |example|
           example.metadata[:response][:content] = {
-            'application/json' => {
+            JSON_CONTENT_TYPE => {
               example: JSON.parse(response.body, symbolize_names: true)
             }
           }
@@ -33,14 +34,14 @@ RSpec.describe 'api/v1/auth/sessions', type: :request do
 
     delete('delete session') do
       response(200, 'successful') do
-        consumes 'application/json'
+        consumes JSON_CONTENT_TYPE
 
         security [Bearer: {}]
         parameter name: :Authorization, in: :header, type: :string, description: 'access_token'
 
         after do |example|
           example.metadata[:response][:content] = {
-            'application/json' => {
+            JSON_CONTENT_TYPE => {
               example: JSON.parse(response.body, symbolize_names: true)
             }
           }

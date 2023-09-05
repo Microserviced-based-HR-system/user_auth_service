@@ -1,12 +1,12 @@
 require 'swagger_helper'
-
+JSON_CONTENT_TYPE = 'application/json'
 RSpec.describe 'api/v1/auth/registrations', type: :request do
 
   path '/api/v1/signup' do
 
     post('create registration') do
       response(200, 'successful') do
-        consumes 'application/json'
+        consumes JSON_CONTENT_TYPE
         parameter name: :user, in: :body, schema: {
           type: :object,
           properties: {
@@ -18,7 +18,7 @@ RSpec.describe 'api/v1/auth/registrations', type: :request do
         }
         after do |example|
           example.metadata[:response][:content] = {
-            'application/json' => {
+            JSON_CONTENT_TYPE => {
               example: JSON.parse(response.body, symbolize_names: true)
             }
           }

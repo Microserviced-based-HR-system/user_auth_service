@@ -1,4 +1,5 @@
 require 'swagger_helper'
+JSON_CONTENT_TYPE = 'application/json'
 
 RSpec.describe 'api/v1/users', type: :request do
 

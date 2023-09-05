@@ -4,6 +4,11 @@ module RackSessionsFix
       def enabled?
         false
       end
+
+    # The 'destroy' method is intentionally left empty
+    # because this fake session doesn't require any cleanup.
+    # It's just a placeholder for the sake of compatibility.
+    
       def destroy; end
     end
     included do
