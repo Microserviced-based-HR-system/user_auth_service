@@ -13,8 +13,13 @@ RSpec.describe 'api/v1/auth/sessions', type: :request do
         parameter name: :user, in: :body, schema: {
           type: :object,
           properties: {
-              email: { type: :string },
-              password: { type: :string }
+            user:{
+              type: :object,
+              properties:{
+                email: { type: :string },
+                password: { type: :string }
+              }
+            } 
           },
           required: %w[email password]
         }
