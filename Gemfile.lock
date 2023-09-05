@@ -88,6 +88,10 @@ GEM
       devise (~> 4.0)
       warden-jwt_auth (~> 0.8)
     diff-lcs (1.5.0)
+    dotenv (2.8.1)
+    dotenv-rails (2.8.1)
+      dotenv (= 2.8.1)
+      railties (>= 3.2)
     dry-auto_inject (1.0.1)
       dry-core (~> 1.0)
       zeitwerk (~> 2.6)
@@ -136,6 +140,8 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     nio4r (2.5.9)
+    nokogiri (1.15.4-aarch64-linux)
+      racc (~> 1.4)
     nokogiri (1.15.4-arm64-darwin)
       racc (~> 1.4)
     orm_adapter (0.5.0)
@@ -236,6 +242,7 @@ GEM
     zeitwerk (2.6.11)
 
 PLATFORMS
+  aarch64-linux
   arm64-darwin-22
 
 DEPENDENCIES
@@ -243,6 +250,7 @@ DEPENDENCIES
   debug
   devise
   devise-jwt
+  dotenv-rails
   factory_bot (~> 6.3)
   jsonapi-serializer
   pg (~> 1.1)

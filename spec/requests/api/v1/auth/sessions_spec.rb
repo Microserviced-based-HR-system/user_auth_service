@@ -1,6 +1,6 @@
 require 'swagger_helper'
 
-RSpec.describe 'api/v1/users/sessions', type: :request do
+RSpec.describe 'api/v1/auth/sessions', type: :request do
 
   let(:Authorization) { "Bearer access token" }
 

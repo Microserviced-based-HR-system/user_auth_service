@@ -1,10 +1,4 @@
 Rails.application.routes.draw do
-  namespace :api do
-    namespace :v1 do
-      get 'users/index'
-      get 'users/show'
-    end
-  end
   mount Rswag::Ui::Engine => '/api-docs'
   mount Rswag::Api::Engine => '/api-docs'
 
@@ -13,6 +7,8 @@ Rails.application.routes.draw do
       resources :users, only: %i[index show]
     end
   end
+
+  
   scope :api, defaults: { format: :json } do
     scope :v1 do
       devise_for :users, defaults: { format: :json }, path: '', path_names: {
@@ -21,10 +17,11 @@ Rails.application.routes.draw do
         registration: 'signup'
       },
       controllers: {
-        sessions: 'api/v1/users/sessions',
-        registrations: 'api/v1/users/registrations'
+        sessions: 'api/v1/auth/sessions',
+        registrations: 'api/v1/auth/registrations'
       }
     end
   end
+
 
 end

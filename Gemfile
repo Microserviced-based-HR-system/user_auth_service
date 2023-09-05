@@ -47,6 +47,7 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem 'rspec-rails'
   gem "rswag-specs"
+  gem "factory_bot", "~> 6.3"
 end
 
 group :development do
@@ -54,5 +55,6 @@ group :development do
   # gem "spring"
 end
 
+gem 'dotenv-rails', groups: [:development, :test]
 
-gem "factory_bot", "~> 6.3"
+

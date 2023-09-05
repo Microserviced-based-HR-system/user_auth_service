@@ -1,6 +1,6 @@
 require 'swagger_helper'
 
-RSpec.describe 'api/v1/users/registrations', type: :request do
+RSpec.describe 'api/v1/auth/registrations', type: :request do
 
   path '/api/v1/signup' do
 

@@ -1,0 +1,42 @@
+version: '3'
+services:
+  # Ruby on Rails application
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: bundle exec rails s -p 3001 -e development -b '0.0.0.0'
+    environment:
+      PGHOST: db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_HOST_AUTH_METHOD: trust
+      RAILS_ENV: development
+      PGDBNAME: userauth_db
+    volumes:
+      - .:/app
+    # command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    ports:
+      - "3001:3001"
+    depends_on:
+      - db
+    
+  # PostgreSQL database
+  db:
+    image: postgres:latest
+    environment:
+      PGHOST: db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_HOST_AUTH_METHOD: trust
+      RAILS_ENV: development
+      PGDBNAME: userauth_db
+    volumes:
+      - 'postgresDB:/var/lib/postgresql/data'
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+volumes:
+  postgresDB:

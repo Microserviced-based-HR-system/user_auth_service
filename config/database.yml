@@ -17,13 +17,16 @@
 default: &default
   adapter: postgresql
   encoding: unicode
+  host: <%= ENV.fetch("PGHOST") %>
+  username: <%= ENV.fetch("POSTGRES_USER") %>
+  password: <%= ENV.fetch("POSTGRES_PASSWORD") %>
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
   <<: *default
-  database: auth_microservice_development
+  database: <%= ENV['PGDBNAME'] %>_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -57,7 +60,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: auth_microservice_test
+  database: <%= ENV['PGDBNAME'] %>_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -79,8 +82,11 @@ test:
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
 #
+
+staging:
+  <<: *default
+  database: <%= ENV['PGDBNAME'] %>_staging
+
 production:
   <<: *default
-  database: auth_microservice_production
-  username: auth_microservice
-  password: <%= ENV["AUTH_MICROSERVICE_DATABASE_PASSWORD"] %>
+  database: <%= ENV['PGDBNAME'] %>_production
