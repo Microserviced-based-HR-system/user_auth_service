@@ -9,7 +9,7 @@ class Api::V1::UsersController < ApplicationController
 
     render json: {
       code: 200, message: 'User List',
-      data: serialized_users
+      users: serialized_users
     }, status: :ok
 
   end
@@ -19,7 +19,7 @@ class Api::V1::UsersController < ApplicationController
     
     render json: {
       code: 200, message: 'Get User by Id',
-      data: UserSerializer.new(@user).serializable_hash[:data][:attributes]
+      user: UserSerializer.new(@user).serializable_hash[:data][:attributes]
     }, status: :ok
   end
 
