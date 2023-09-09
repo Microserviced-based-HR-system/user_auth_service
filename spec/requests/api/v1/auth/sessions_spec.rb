@@ -41,7 +41,6 @@ RSpec.describe 'API v1 Auth Sessions', type: :request do
           expect(response_data[:code]).to eq(200)
           expect(response_data[:message]).to eq('Logged in successfully.')
           
-          # Add more expectations here based on your application's response format.
         end
       end
 
@@ -90,16 +89,12 @@ RSpec.describe 'API v1 Auth Sessions', type: :request do
           expect(response).to have_http_status(200)
           expect(response.content_type).to eq('application/json; charset=utf-8')
           response_data = JSON.parse(response.body, symbolize_names: true)
-          # Add your specific expectations here based on the expected response data.
         end
       end
     end
   end
 
   def login(user)
-    # Implement your login logic here, e.g., make a POST request to your login endpoint
-    # and return the session token
-    # Example:
     post '/api/v1/login', params: {
       user: {
         email: user.email,
