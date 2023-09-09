@@ -33,6 +33,42 @@ RSpec.configure do |config|
           }
         }
       ],
+      components: {
+        schemas: {
+          error_response: {
+            type: :object,
+            properties: {
+              errors: {
+                type: :array,
+                items: {
+                  type: :object,
+                  properties: {
+                    type: {type: :string,
+                           description: 'type of error'},
+                    message: {type: :string, nullable: true}
+                  },
+                  required: %w(type message)
+                },
+              },
+              status: {type: :integer}
+            },
+            required: %w(errors status)
+          },
+          user: {
+            type: :object,
+            properties: {
+              id: {type: :string},
+              username: {type: :string},
+              email: {type: :string},
+              password: {type: :string},
+              roles: {type: :array}
+          
+            },
+            required: %w(id username email password)
+          }
+
+        }
+      },
       securityDefinitions: {
         Bearer: {
           description: '...',

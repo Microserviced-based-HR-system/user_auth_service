@@ -2,6 +2,7 @@ require_relative "boot"
 
 require "rails/all"
 require 'dotenv/rails-now'
+require 'factory_bot_rails'
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -23,5 +24,8 @@ module AuthMicroservice
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    config.factory_bot.definition_file_paths = ["spec/factories"]
+
   end
 end

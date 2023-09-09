@@ -7,7 +7,7 @@
   "paths": {
     "/api/v1/signup": {
       "post": {
-        "summary": "create registration",
+        "summary": "Create Registration",
         "consumes": [
           "application/json"
         ],
@@ -30,14 +30,14 @@
                     "username": {
                       "type": "string"
                     }
-                  }
+                  },
+                  "required": [
+                    "email",
+                    "password",
+                    "username"
+                  ]
                 }
-              },
-              "required": [
-                "email",
-                "password",
-                "username"
-              ]
+              }
             }
           }
         ],
@@ -50,7 +50,7 @@
     },
     "/api/v1/login": {
       "post": {
-        "summary": "create session upon login",
+        "summary": "Create Session upon Login",
         "consumes": [
           "application/json"
         ],
@@ -70,26 +70,29 @@
                     "password": {
                       "type": "string"
                     }
-                  }
+                  },
+                  "required": [
+                    "email",
+                    "password"
+                  ]
                 }
-              },
-              "required": [
-                "email",
-                "password"
-              ]
+              }
             }
           }
         ],
         "responses": {
           "200": {
             "description": "successful"
+          },
+          "401": {
+            "description": "unauthorized"
           }
         }
       }
     },
     "/api/v1/logout": {
       "delete": {
-        "summary": "delete session",
+        "summary": "Delete Session",
         "consumes": [
           "application/json"
         ],
@@ -117,6 +120,12 @@
     "/api/v1/users": {
       "get": {
         "summary": "list users",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "security": [
           {
             "Bearer": {
@@ -128,12 +137,26 @@
             "name": "Authorization",
             "in": "header",
             "type": "string",
-            "description": "access_token"
+            "description": "Access Token"
           }
         ],
         "responses": {
           "200": {
-            "description": "successful"
+            "description": "get user list",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "users": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/user"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -152,13 +175,13 @@
             "name": "Authorization",
             "in": "header",
             "type": "string",
-            "description": "access_token"
+            "description": "Access Token"
           },
           {
             "name": "id",
             "in": "path",
             "type": "string",
-            "description": "userId",
+            "description": "User ID",
             "required": true
           }
         ],
@@ -180,6 +203,68 @@
       }
     }
   ],
+  "components": {
+    "schemas": {
+      "error_response": {
+        "type": "object",
+        "properties": {
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "type of error"
+                },
+                "message": {
+                  "type": "string",
+                  "nullable": true
+                }
+              },
+              "required": [
+                "type",
+                "message"
+              ]
+            }
+          },
+          "status": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "errors",
+          "status"
+        ]
+      },
+      "user": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "roles": {
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "username",
+          "email",
+          "password"
+        ]
+      }
+    }
+  },
   "securityDefinitions": {
     "Bearer": {
       "description": "...",
