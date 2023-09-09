@@ -11,6 +11,7 @@ gem "bootsnap", require: false
 gem "rack-cors"
 gem "devise"
 gem "devise-jwt"
+gem 'warden-jwt_auth', '~> 0.6.0'
 gem "jsonapi-serializer"
 gem "rswag"
 

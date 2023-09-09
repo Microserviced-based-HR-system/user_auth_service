@@ -3,8 +3,6 @@ JSON_CONTENT_TYPE = 'application/json'
 
 RSpec.describe 'api/v1/users', type: :request do
   
-  let(:id) { '123' }
-
 
   path '/api/v1/users' do
     get('list users') do
@@ -15,46 +13,81 @@ RSpec.describe 'api/v1/users', type: :request do
       
 
       response 200, 'get user list' do
-        let(:Authorization) do
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI2OWQ5YTI2NS1lY2QyLTQ1Y2UtYmNkMi1lOTBjZDg3ZmJjZWYiLCJzdWIiOiI4MTViYTM3YS02ZTU5LTQ5MWQtYTY1Yy1iOTYyMWU3Y2FhYjUiLCJzY3AiOiJ1c2VyIiwiYXVkIjpudWxsLCJpYXQiOjE2OTQwNjA4MjUsImV4cCI6MTY5NTM1NjgyNX0.SrDNIZmrNeWJLqnJHGP7x3OEtwYUXLiSe25jd6ONsEs"
-        end
-        schema type: :array, items: {
-          type: :object,
-          properties: {
-            users: {
-              type: :array,
-              items: {'$ref' => '#/components/schemas/user'}
-            }
-          },
-        
-        }
-        run_test!
-      end
 
-      response '401', 'Unauthorized' do
-        let(:Authorization) { -1 }
- 
-        run_test!
+        before do
+          @user = FactoryBot.create(:user)
+          @session_token = login(@user)
+        end
+  
+        let(:Authorization) do
+          "Bearer #{@session_token}"
+        end
+
+        # schema type: :array, items: {
+        #   type: :object,
+        #   properties: {
+        #     users: {
+        #       type: :array,
+        #       items: {'$ref' => '#/components/schemas/user'}
+        #     }
+        #   },
+        
+        # }
+
+        run_test! do
+          expect(response).to have_http_status(200)
+          expect(response.content_type).to eq('application/json; charset=utf-8')
+          response_data = JSON.parse(response.body, symbolize_names: true)
+          # Add your specific expectations here based on the expected response data.
+        end
+
+      end
+    end
+  end
+  
+  path '/api/v1/users/{id}' do
+    get('show user') do
+      security [Bearer: {}]
+      parameter name: :Authorization, in: :header, type: :string, description: 'Access Token'
+      parameter name: 'id', in: :path, type: :string, description: 'User ID'
+
+      response(200, 'successful') do
+        
+        before do
+          @user = FactoryBot.create(:user)
+          @session_token = login(@user)
+        end
+  
+        let(:Authorization) do
+          "Bearer #{@session_token}"
+        end
+
+        let(:id) { @user.id }
+
+        
+        run_test! do
+          expect(response).to have_http_status(200)
+          expect(response.content_type).to eq('application/json; charset=utf-8')
+          response_data = JSON.parse(response.body, symbolize_names: true)
+          # Add your specific expectations here based on the expected response data.
+        end
+
       end
     end
   end
 
-  # path '/api/v1/users/{id}' do
-  #   get('show user') do
-  #     security [Bearer: {}]
-  #     parameter name: :Authorization, in: :header, type: :string, description: 'Access Token'
-  #     parameter name: 'id', in: :path, type: :string, description: 'User ID'
+  def login(user)
+    # Implement your login logic here, e.g., make a POST request to your login endpoint
+    # and return the session token
+    # Example:
+    post '/api/v1/login', params: {
+      user: {
+        email: user.email,
+        password: user.password
+      }
+    }
+    response.headers['Authorization'].split(' ').last
+  end
 
-  #     response(200, 'successful') do
-  #       after do |example|
-  #         example.metadata[:response][:content] = {
-  #           'application/json' => {
-  #             example: JSON.parse(response.body, symbolize_names: true)
-  #           }
-  #         }
-  #       end
-  #       run_test!
-  #     end
-  #   end
-  # end
+
 end
