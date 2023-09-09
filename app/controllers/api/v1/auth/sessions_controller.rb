@@ -24,7 +24,7 @@ class Api::V1::Auth::SessionsController < Devise::SessionsController
     
     if request.headers['Authorization'].present?
       begin
-        jwt_payload = JWT.decode(request.headers['Authorization'].split(' ').last, Rails.application.credentials.devise_jwt_secret_key!).first
+        jwt_payload = JWT.decode(request.headers['Authorization'].split(' ').last, ENV['DEVISE_JWT_SECRET_KEY']).first
       rescue JWT::DecodeError => e
         response_data = {
           status: 401,
