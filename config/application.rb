@@ -27,5 +27,11 @@ module AuthMicroservice
 
     config.factory_bot.definition_file_paths = ["spec/factories"]
 
+    # Load my own middleware
+    Dir[Rails.root.join('lib', 'middleware', '*.{rb}')].each { |file| require file }
+
+    # Add own middleware for catching errors
+    config.middleware.use Middleware::CatchRackErrors
+
   end
 end
