@@ -8,8 +8,10 @@ Rails.application.routes.draw do
         member do
           post 'assign_role'
           delete 'remove_role'
-          patch 'update_username'
         end
+
+        patch 'update_username', on: :collection
+        
       end
     end
   end

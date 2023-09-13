@@ -102,7 +102,7 @@ RSpec.describe 'api/v1/users', type: :request do
 
         run_test! do
           expect(response).to have_http_status(200)
-          p response_data = JSON.parse(response.body, symbolize_names: true)
+          response_data = JSON.parse(response.body, symbolize_names: true)
           expect(response.content_type).to eq('application/json; charset=utf-8')
           expect(response_data[:user][:roles]).to include('hr_manager')
           response_data = JSON.parse(response.body, symbolize_names: true)
@@ -169,7 +169,7 @@ RSpec.describe 'api/v1/users', type: :request do
 
         run_test! do
           expect(response).to have_http_status(200)
-          p response_data = JSON.parse(response.body, symbolize_names: true)
+          response_data = JSON.parse(response.body, symbolize_names: true)
           expect(response.content_type).to eq('application/json; charset=utf-8')
           expect(response.content_type).to eq('application/json; charset=utf-8')
           expect(response_data[:user][:roles]).not_to include('recruiter')
@@ -192,12 +192,67 @@ RSpec.describe 'api/v1/users', type: :request do
   
         run_test! do
           expect(response).to have_http_status(422)
-          p response_data = JSON.parse(response.body, symbolize_names: true)
+          response_data = JSON.parse(response.body, symbolize_names: true)
           expect(response_data[:error]).to eq('Role removal failed.')
           expect(response.content_type).to eq('application/json; charset=utf-8')
         end
       end
       
+    end
+  end
+
+  path '/api/v1/users/update_username' do
+    patch 'Update a user\'s username' do
+      tags 'Users'
+      consumes 'application/json'
+      produces 'application/json'
+
+      security [Bearer: {}]
+      parameter name: :Authorization, in: :header, type: :string, description: 'Access Token'
+      parameter name: :user, in: :body, schema: {
+        type: :object,
+        properties: {
+          username: { type: :string }
+        }
+      }
+      response '200', 'Username updated' do
+
+        before do
+          p @user = FactoryBot.create(:user)
+          p @session_token = login(@user)
+        end
+
+        let(:Authorization) do
+          "Bearer #{@session_token}"
+        end
+        
+        let(:user) { { username: 'new_username' } }
+
+        run_test! do
+          # p response_data = JSON.parse(response.body, symbolize_names: true)
+          expect(response).to have_http_status(200)
+          expect(response.body).to include("Username updated to 'new_username'.")
+        end
+      end
+
+      response '422', 'Validation errors' do
+        before do
+          @user = FactoryBot.create(:user)
+          @session_token = login(@user)
+        end
+  
+        let(:Authorization) do
+          "Bearer #{@session_token}"
+        end
+  
+        let(:user) { { username: '' } } # Invalid username
+  
+        run_test! do
+          expect(response).to have_http_status(422)
+          expect(response.body).to include('Username update failed.')
+        end
+      end
+
     end
   end
 

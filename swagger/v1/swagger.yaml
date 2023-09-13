@@ -323,6 +323,54 @@
           }
         }
       }
+    },
+    "/api/v1/users/update_username": {
+      "patch": {
+        "summary": "Update a user's username",
+        "tags": [
+          "Users"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "Bearer": {
+            }
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "description": "Access Token"
+          },
+          {
+            "name": "user",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Username updated"
+          },
+          "422": {
+            "description": "Validation errors"
+          }
+        }
+      }
     }
   },
   "servers": [

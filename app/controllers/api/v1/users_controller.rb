@@ -43,11 +43,9 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def update_username
-    user = User.find(params[:id])
     new_username = params[:username]
-
-    if user && user.update(username: new_username)
-      render_success("Username updated to '#{new_username}'.", user)
+    if current_user && current_user.update(username: new_username)
+      render_success("Username updated to '#{new_username}'.", current_user)
     else
       render_error("Username update failed.")
     end
