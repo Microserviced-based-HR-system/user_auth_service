@@ -14,6 +14,7 @@ gem "devise-jwt"
 gem 'warden-jwt_auth', '~> 0.6.0'
 gem "jsonapi-serializer"
 gem "rswag"
+gem 'pagy', '~> 6.0' 
 
 group :development, :test do
 

@@ -4,7 +4,13 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: {format: :json} do
     namespace :v1 do
-      resources :users, only: %i[index show]
+      resources :users, only: %i[index show] do
+        member do
+          post 'assign_role'
+          delete 'remove_role'
+          patch 'update_username'
+        end
+      end
     end
   end
 

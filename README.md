@@ -7,5 +7,15 @@ Things you may want to cover:
 
 - API Documentaion at:
 - http://127.0.0.1:3001/api-docs/index.html
-- rake rswag:specs:swaggerize
-- bundle exec rspec
+
+**Swaggerize**
+```
+rake rswag:specs:swaggerize
+bundle exec rspec
+```
+
+**Containerize Ror app**
+```
+docker-compose up --build
+docker-compose run web rake rswag:specs:swaggerize
+```
