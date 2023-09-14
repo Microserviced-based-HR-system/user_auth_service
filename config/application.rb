@@ -3,6 +3,7 @@ require_relative "boot"
 require "rails/all"
 require 'dotenv/rails-now'
 require 'factory_bot_rails'
+require 'sprockets/railtie'
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -32,6 +33,10 @@ module AuthMicroservice
 
     # Add own middleware for catching errors
     config.middleware.use Middleware::CatchRackErrors
+
+    config.session_store :cookie_store, key: '_interslice_session'
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use config.session_store, config.session_options
 
   end
 end

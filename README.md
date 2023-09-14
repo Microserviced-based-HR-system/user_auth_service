@@ -19,3 +19,48 @@ bundle exec rspec
 docker-compose up --build
 docker-compose run web rake rswag:specs:swaggerize
 ```
+
+**GraphQL**
+
+Gell all the users
+```
+query {
+  users {
+    id
+    username
+    email
+    roles
+  }
+}
+
+```
+
+Get user by id
+```
+query {
+  user(id: "id") {
+    username
+    email
+    roles
+  }
+}
+```
+
+Create a user
+```
+mutation {
+  createUser(input: {
+    email: "spiderman@mail.com"
+    password: "abcABC!1"
+    username: "spiderman"
+  }) {
+    user {
+      id
+      username
+      email
+      roles
+    }
+    errors
+  }
+}
+```
