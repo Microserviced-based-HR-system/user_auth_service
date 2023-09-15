@@ -1,7 +1,7 @@
 name: RSpec Tests and ECR Deployment
 on:
   push:
-    branches: [ "devlop" ]
+    branches: [ "develop" ]
   pull_request:
     branches: [ "main" ]
 jobs:

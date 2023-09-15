@@ -102,14 +102,14 @@ RSpec.describe 'api/v1/users', type: :request do
 
         run_test! do
           expect(response).to have_http_status(200)
-          response_data = JSON.parse(response.body, symbolize_names: true)
+          p response_data = JSON.parse(response.body, symbolize_names: true)
           expect(response.content_type).to eq('application/json; charset=utf-8')
-          expect(response_data[:user][:roles]).to include('hr_manager')
+          expect(response_data[:data][:roles]).to include('hr_manager')
           response_data = JSON.parse(response.body, symbolize_names: true)
         end
       end
 
-      response '422', 'forbidden' do
+      response '401', 'forbidden' do
         before do
           @user = FactoryBot.create(:user)
           @session_token = login(@user)
@@ -123,9 +123,9 @@ RSpec.describe 'api/v1/users', type: :request do
         let(:role) { 'user' } # The role to assign to another user
   
         run_test! do
-          expect(response).to have_http_status(422)
+          expect(response).to have_http_status(401)
           response_data = JSON.parse(response.body, symbolize_names: true)
-          expect(response_data[:error]).to eq('Role assignment failed.')
+          expect(response_data[:error]).to eq('You are not authorized to perform this action.')
           expect(response.content_type).to eq('application/json; charset=utf-8')
         end
       end
@@ -172,12 +172,12 @@ RSpec.describe 'api/v1/users', type: :request do
           response_data = JSON.parse(response.body, symbolize_names: true)
           expect(response.content_type).to eq('application/json; charset=utf-8')
           expect(response.content_type).to eq('application/json; charset=utf-8')
-          expect(response_data[:user][:roles]).not_to include('recruiter')
+          expect(response_data[:data][:roles]).not_to include('recruiter')
           response_data = JSON.parse(response.body, symbolize_names: true)
         end
       end
 
-      response '422', 'Forbidden' do
+      response '401', 'Forbidden' do
         before do
           @user = FactoryBot.create(:user)
           @session_token = login(@user)
@@ -191,9 +191,9 @@ RSpec.describe 'api/v1/users', type: :request do
         end
   
         run_test! do
-          expect(response).to have_http_status(422)
+          expect(response).to have_http_status(401)
           response_data = JSON.parse(response.body, symbolize_names: true)
-          expect(response_data[:error]).to eq('Role removal failed.')
+          expect(response_data[:error]).to eq('You are not authorized to perform this action.')
           expect(response.content_type).to eq('application/json; charset=utf-8')
         end
       end
@@ -218,8 +218,8 @@ RSpec.describe 'api/v1/users', type: :request do
       response '200', 'Username updated' do
 
         before do
-          p @user = FactoryBot.create(:user)
-          p @session_token = login(@user)
+          @user = FactoryBot.create(:user)
+          @session_token = login(@user)
         end
 
         let(:Authorization) do

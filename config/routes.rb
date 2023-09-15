@@ -8,10 +8,8 @@ Rails.application.routes.draw do
 
   post "/graphql", to: "graphql#execute"
 
-
-  scope :api, defaults: { format: :json } do
-    scope :v1 do
-
+  namespace :api, defaults: {format: :json} do
+    namespace :v1 do
       resources :users, only: %i[index show] do
         member do
           post 'assign_role'
@@ -19,9 +17,13 @@ Rails.application.routes.draw do
         end
 
         patch 'update_username', on: :collection
-        
       end
-      
+    end
+  end
+
+  
+  scope :api, defaults: { format: :json } do
+    scope :v1 do
       devise_for :users, defaults: { format: :json }, path: '', path_names: {
         sign_in: 'login',
         sign_out: 'logout',

@@ -11,6 +11,8 @@ class User < ApplicationRecord
   validates :email, presence: true
   validates :password, presence: true, format: { with: /\A(?=.*[a-zA-Z])(?=.*[0-9]).{6,}\z/,
     message: "must be at least 6 characters long and include both letters and numbers" }, if: :password_required?
+  
+
   private
 
   def assign_default_role
@@ -20,5 +22,8 @@ class User < ApplicationRecord
   def password_required?
     new_record? || password.present?
   end
+
+
+
   
 end

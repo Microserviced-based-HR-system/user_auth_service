@@ -4,48 +4,26 @@ class Api::V1::UsersController < ApplicationController
 
   def index
     @pagy, @users = pagy(User.order(created_at: :desc), items: params[:per_page])
-    render_success("User List", users: @users, pagy: pagy_metadata(@pagy))
+    render_success("User List", serialized_users, pagy_metadata(@pagy))
   end
 
   def show
-    @user = User.find(params[:id])
-    render_success("User Details", @user)
+    @user = find_user
+    render_success("User Details", serialized_user(@user))
   end
 
   def assign_role
-    unless current_user.has_role?("hr_manager")
-      return render_error("Role assignment failed.")
-    end
-
-    user = User.find(params[:id])
-    role_name = params[:role]
-
-    if user && user.add_role(role_name)
-      render_success("Role '#{role_name}' assigned to user '#{user.username}'.", user)
-    else
-      render_error("Role assignment failed.")
-    end
+    authorize_and_perform_action("add")
   end
 
   def remove_role
-    unless current_user.has_role?("hr_manager")
-      return render_error("Role removal failed.")
-    end
-
-    user = User.find(params[:id])
-    role_name = params[:role]
-
-    if user && user.remove_role(role_name)
-      render_success("Role '#{role_name}' removed from user '#{user.username}'.", user)
-    else
-      render_error("Role removal failed.")
-    end
+    authorize_and_perform_action("remove")
   end
 
   def update_username
     new_username = params[:username]
     if current_user && current_user.update(username: new_username)
-      render_success("Username updated to '#{new_username}'.", current_user)
+      render_success("Username updated to '#{new_username}'.", serialized_user(current_user))
     else
       render_error("Username update failed.")
     end
@@ -53,26 +31,46 @@ class Api::V1::UsersController < ApplicationController
 
   private
 
-  def render_success(message, data)
+  def authorize_and_perform_action(action)
+    authorize current_user
+    user = find_user
+    role_name = user_params[:role]
+
+    if user && user.send("#{action}_role", role_name)
+      render_success("Role '#{role_name}' #{action}ed.", serialized_user(user))
+    else
+      render_error("Failed.")
+    end
+  end
+
+  def render_success(message, data, pagy =nil)
     response_data = {
       code: 200,
-      message: message
+      message: message,
+      data: data
     }
-
-    if data.is_a?(User)
-      response_data[:user] = UserSerializer.new(data).serializable_hash[:data][:attributes]
-    else
-     
-      response_data[:users] = data[:users].map do |user|
-        UserSerializer.new(user).serializable_hash[:data][:attributes]
-      end
-      response_data[:pagy] = data[:pagy]
-    end
-
+    response_data[:pagy] = pagy if pagy
     render json: response_data
   end
 
   def render_error(error_message, status = :unprocessable_entity)
     render json: { error: error_message }, status: status
   end
+
+  def find_user
+    User.find(user_params[:id])
+  end
+
+  def serialized_user(user)
+    UserSerializer.new(user).serializable_hash[:data][:attributes]
+  end
+
+  def serialized_users
+    @users.map { |user| serialized_user(user) }
+  end
+
+  def user_params
+    params.permit(:id, :role, :username)
+  end
+
 end

@@ -41,3 +41,5 @@ gem "rolify"
 
 
 gem "sprockets-rails", "~> 3.4"
+
+gem "pundit", "~> 2.3"

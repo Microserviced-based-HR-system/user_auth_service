@@ -267,7 +267,7 @@
           "200": {
             "description": "role assigned"
           },
-          "422": {
+          "401": {
             "description": "forbidden"
           }
         }
@@ -318,7 +318,7 @@
           "200": {
             "description": "Remove Role"
           },
-          "422": {
+          "401": {
             "description": "Forbidden"
           }
         }
