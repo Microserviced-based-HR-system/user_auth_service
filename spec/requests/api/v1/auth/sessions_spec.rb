@@ -8,6 +8,7 @@ RSpec.describe 'API v1 Auth Sessions', type: :request do
 
   path '/api/v1/login' do
     post('Create Session upon Login') do
+      tags 'Authentication'
       consumes 'application/json'
       parameter name: :user, in: :body, schema: {
         type: :object,
@@ -15,8 +16,8 @@ RSpec.describe 'API v1 Auth Sessions', type: :request do
           user: {
             type: :object,
             properties: {
-              email: { type: :string },
-              password: { type: :string }
+              email: { type: :string , default: "admin@email.com"},
+              password: { type: :string , default: "abcABC1"},
             },
             required: %w[email password]
           }
@@ -87,6 +88,7 @@ RSpec.describe 'API v1 Auth Sessions', type: :request do
 
   path '/api/v1/logout' do
     delete('Delete Session') do
+      tags 'Authentication'
       consumes 'application/json'
       security [Bearer: {}]
       parameter name: :Authorization, in: :header, type: :string, description: 'access_token'

@@ -8,6 +8,9 @@
     "/api/v1/signup": {
       "post": {
         "summary": "Create Registration",
+        "tags": [
+          "Authentication"
+        ],
         "consumes": [
           "application/json"
         ],
@@ -22,13 +25,16 @@
                   "type": "object",
                   "properties": {
                     "email": {
-                      "type": "string"
+                      "type": "string",
+                      "default": "admin@email.com"
                     },
                     "password": {
-                      "type": "string"
+                      "type": "string",
+                      "default": "abcABC1"
                     },
                     "username": {
-                      "type": "string"
+                      "type": "string",
+                      "default": "admin"
                     }
                   },
                   "required": [
@@ -36,6 +42,10 @@
                     "password",
                     "username"
                   ]
+                },
+                "role": {
+                  "type": "string",
+                  "default": "admin"
                 }
               }
             }
@@ -54,6 +64,9 @@
     "/api/v1/login": {
       "post": {
         "summary": "Create Session upon Login",
+        "tags": [
+          "Authentication"
+        ],
         "consumes": [
           "application/json"
         ],
@@ -68,10 +81,12 @@
                   "type": "object",
                   "properties": {
                     "email": {
-                      "type": "string"
+                      "type": "string",
+                      "default": "admin@email.com"
                     },
                     "password": {
-                      "type": "string"
+                      "type": "string",
+                      "default": "abcABC1"
                     }
                   },
                   "required": [
@@ -96,6 +111,9 @@
     "/api/v1/logout": {
       "delete": {
         "summary": "Delete Session",
+        "tags": [
+          "Authentication"
+        ],
         "consumes": [
           "application/json"
         ],
@@ -126,6 +144,9 @@
     "/api/v1/users": {
       "get": {
         "summary": "list users",
+        "tags": [
+          "Users"
+        ],
         "consumes": [
           "application/json"
         ],
@@ -144,6 +165,20 @@
             "in": "header",
             "type": "string",
             "description": "Access Token"
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "type": "integer",
+            "description": "no of items per page",
+            "default": 3
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "type": "integer",
+            "description": "page no",
+            "default": 1
           }
         ],
         "responses": {
@@ -156,6 +191,9 @@
     "/api/v1/users/{id}": {
       "get": {
         "summary": "show user",
+        "tags": [
+          "Users"
+        ],
         "security": [
           {
             "Bearer": {
@@ -180,6 +218,156 @@
         "responses": {
           "200": {
             "description": "successful"
+          }
+        }
+      }
+    },
+    "/api/v1/users/{id}/assign_role": {
+      "post": {
+        "summary": "Assign a role to a user",
+        "tags": [
+          "Users"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "Bearer": {
+            }
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "description": "Access Token"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "role",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "role assigned"
+          },
+          "401": {
+            "description": "forbidden"
+          }
+        }
+      }
+    },
+    "/api/v1/users/{id}/remove_role": {
+      "delete": {
+        "summary": "Delete a role to a user",
+        "tags": [
+          "Users"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "Bearer": {
+            }
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "description": "Access Token"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "role",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Remove Role"
+          },
+          "401": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/api/v1/users/update_username": {
+      "patch": {
+        "summary": "Update a user's username",
+        "tags": [
+          "Users"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "Bearer": {
+            }
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "description": "Access Token"
+          },
+          {
+            "name": "user",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Username updated"
+          },
+          "422": {
+            "description": "Validation errors"
           }
         }
       }

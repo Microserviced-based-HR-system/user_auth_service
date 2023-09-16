@@ -1,26 +1,76 @@
 class Api::V1::UsersController < ApplicationController
   before_action :authenticate_user!
+  include Pagy::Backend
 
   def index
-    @users = User.all
-    serialized_users = @users.map do |user|
-      UserSerializer.new(user).serializable_hash[:data][:attributes]
-    end
-
-    render json: {
-      code: 200, message: 'User List',
-      users: serialized_users
-    }, status: :ok
-
+    @pagy, @users = pagy(User.order(created_at: :desc), items: params[:per_page])
+    render_success("User List", serialized_users, pagy_metadata(@pagy))
   end
 
   def show
-    @user = User.find(params[:id])
-    
-    render json: {
-      code: 200, message: 'Get User by Id',
-      user: UserSerializer.new(@user).serializable_hash[:data][:attributes]
-    }, status: :ok
+    @user = find_user
+    render_success("User Details", serialized_user(@user))
+  end
+
+  def assign_role
+    authorize_and_perform_action("add")
+  end
+
+  def remove_role
+    authorize_and_perform_action("remove")
+  end
+
+  def update_username
+    new_username = params[:username]
+    if current_user && current_user.update(username: new_username)
+      render_success("Username updated to '#{new_username}'.", serialized_user(current_user))
+    else
+      render_error("Username update failed.")
+    end
+  end
+
+  private
+
+  def authorize_and_perform_action(action)
+    authorize current_user
+    user = find_user
+    role_name = user_params[:role]
+
+    if user && user.send("#{action}_role", role_name)
+      render_success("Role '#{role_name}' #{action}ed.", serialized_user(user))
+    else
+      render_error("Failed.")
+    end
+  end
+
+  def render_success(message, data, pagy =nil)
+    response_data = {
+      code: 200,
+      message: message,
+      data: data
+    }
+    response_data[:pagy] = pagy if pagy
+    render json: response_data
+  end
+
+  def render_error(error_message, status = :unprocessable_entity)
+    render json: { error: error_message }, status: status
+  end
+
+  def find_user
+    User.find(user_params[:id])
+  end
+
+  def serialized_user(user)
+    UserSerializer.new(user).serializable_hash[:data][:attributes]
+  end
+
+  def serialized_users
+    @users.map { |user| serialized_user(user) }
+  end
+
+  def user_params
+    params.permit(:id, :role, :username)
   end
 
 end

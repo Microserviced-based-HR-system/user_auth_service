@@ -14,6 +14,11 @@ gem "devise-jwt"
 gem 'warden-jwt_auth', '~> 0.6.0'
 gem "jsonapi-serializer"
 gem "rswag"
+gem 'pagy', '~> 6.0' 
+gem 'graphql'
+gem 'graphiql-rails', group: :development
+
+gem 'actionpack-action_caching'
 
 group :development, :test do
 
@@ -33,3 +38,8 @@ group :test do
 end
 
 gem "rolify"
+
+
+gem "sprockets-rails", "~> 3.4"
+
+gem "pundit", "~> 2.3"

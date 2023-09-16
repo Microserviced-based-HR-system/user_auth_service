@@ -1,10 +1,23 @@
 Rails.application.routes.draw do
   mount Rswag::Ui::Engine => '/api-docs'
   mount Rswag::Api::Engine => '/api-docs'
+  
+  if Rails.env.development?
+    mount GraphiQL::Rails::Engine, at: '/graphql', graphql_path: '/graphql#execute'
+  end
+
+  post "/graphql", to: "graphql#execute"
 
   namespace :api, defaults: {format: :json} do
     namespace :v1 do
-      resources :users, only: %i[index show]
+      resources :users, only: %i[index show] do
+        member do
+          post 'assign_role'
+          delete 'remove_role'
+        end
+
+        patch 'update_username', on: :collection
+      end
     end
   end
 
