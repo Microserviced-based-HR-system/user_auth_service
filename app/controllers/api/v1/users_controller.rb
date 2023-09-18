@@ -8,8 +8,12 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show
-    @user = find_user
-    render_success("User Details", serialized_user(@user))
+    begin
+      @user = find_user
+      render_success("User Details", serialized_user(@user))
+    rescue ActiveRecord::RecordNotFound
+      render_error("User not found", :not_found)
+    end
   end
 
   def assign_role

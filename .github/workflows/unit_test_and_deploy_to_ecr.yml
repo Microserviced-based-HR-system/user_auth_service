@@ -13,7 +13,7 @@ jobs:
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: ""
-          POSTGRES_DB: postgres
+          POSTGRES_DB: auth_service_test
         ports:
           - 5432:5432
         # needed because the postgres container does not provide a healthcheck
@@ -55,11 +55,16 @@ jobs:
           # runs 'bundle install' and caches installed gems automatically
           bundler-cache: true
 
+      - name: Set up environment variables
+        run: |
+          echo "RAILS_ENV=test" >> .env
+       
+
       - name: Create DB
         run: |
           bin/rails db:prepare
           
-      - name: Run tests
+      - name: Run RSpec tests
         env:
           DEVISE_JWT_SECRET_KEY: ${{ secrets.devise_jwt_secret_key }}
         run: |

@@ -30,7 +30,11 @@ module Types
       argument :id, ID, required: true
     end
     def user(id:)
-      User.find(id)
+      begin
+        User.find(id)
+      rescue ActiveRecord::RecordNotFound
+        raise GraphQL::ExecutionError, "User not found"
+      end
     end
     
   end
