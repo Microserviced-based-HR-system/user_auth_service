@@ -73,7 +73,11 @@ GEM
     bcrypt (3.1.19)
     bootsnap (1.16.0)
       msgpack (~> 1.2)
+    brakeman (6.0.1)
     builder (3.2.4)
+    bundler-audit (0.9.1)
+      bundler (>= 1.2.0, < 3)
+      thor (~> 1.0)
     codecov (0.6.0)
       simplecov (>= 0.15, < 0.22)
     concurrent-ruby (1.2.2)
@@ -289,6 +293,8 @@ PLATFORMS
 DEPENDENCIES
   actionpack-action_caching
   bootsnap
+  brakeman (~> 6.0)
+  bundler-audit (~> 0.9.1)
   codecov
   debug
   devise

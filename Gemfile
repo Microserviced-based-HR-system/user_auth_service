@@ -39,7 +39,10 @@ end
 
 gem "rolify"
 
-
 gem "sprockets-rails", "~> 3.4"
 
 gem "pundit", "~> 2.3"
+
+gem "brakeman", "~> 6.0", group: :development
+
+gem "bundler-audit", "~> 0.9.1"

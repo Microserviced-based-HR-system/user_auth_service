@@ -39,7 +39,7 @@ class Api::V1::UsersController < ApplicationController
     if user && user.send("#{action}_role", role_name)
       render_success("Role '#{role_name}' #{action}ed.", serialized_user(user))
     else
-      render_error("Failed.")
+      render_error("Invalid role name, failed.")
     end
   end
 

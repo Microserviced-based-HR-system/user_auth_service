@@ -12,13 +12,13 @@ RSpec.describe 'API v1 Auth Registrations', type: :request do
           user: {
             type: :object,
             properties: {
-              email: { type: :string , default: "admin@email.com"},
+              email: { type: :string , default: "employee@email.com"},
               password: { type: :string , default: "abcABC1"},
-              username: { type: :string , default: "admin"}
+              username: { type: :string , default: "emp1"}
             },
             required: %w[email password username]
           },
-          role: {type: :string, default: "admin"}
+          role: {type: :string, default: "employee"}
         }
       }
 

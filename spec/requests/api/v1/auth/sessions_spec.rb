@@ -16,7 +16,7 @@ RSpec.describe 'API v1 Auth Sessions', type: :request do
           user: {
             type: :object,
             properties: {
-              email: { type: :string , default: "admin@email.com"},
+              email: { type: :string , default: "hrisadmin@example.com"},
               password: { type: :string , default: "abcABC1"},
             },
             required: %w[email password]
@@ -79,7 +79,7 @@ RSpec.describe 'API v1 Auth Sessions', type: :request do
           expect(response).to have_http_status(401)
           expect(response.content_type).to eq('application/json; charset=utf-8')
           response_data = JSON.parse(response.body, symbolize_names: true)
-          expect(response_data[:error]).to include("You need to sign in or sign up before continuing.")
+          expect(response_data[:error]).to include("Invalid Email or password.")
         end
       end
       
@@ -93,25 +93,24 @@ RSpec.describe 'API v1 Auth Sessions', type: :request do
       security [Bearer: {}]
       parameter name: :Authorization, in: :header, type: :string, description: 'access_token'
 
-      response '200', 'successful' do
-
+      response '200', 'Logout successful' do
         before do
           @user = FactoryBot.create(:user)
           @session_token = login(@user)
         end
   
-        let(:Authorization) do
-          "Bearer #{@session_token}"
-        end
-
+        let(:Authorization) { "Bearer #{@session_token}" }
+  
         run_test! do
           expect(response).to have_http_status(200)
           expect(response.content_type).to eq('application/json; charset=utf-8')
           response_data = JSON.parse(response.body, symbolize_names: true)
+          expect(response_data[:message]).to include('Logged out successfully.')
         end
       end
+      
 
-      response '401', 'successful' do
+      response '401', 'Token invalid or expired' do
   
         let(:Authorization) do
           "Bearer access token"

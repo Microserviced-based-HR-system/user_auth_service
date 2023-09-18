@@ -67,4 +67,23 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe '#add_role' do
+    let(:user) { FactoryBot.create(:user) }
+
+    context 'when a valid role is added' do
+      it 'adds the role to the user' do
+        expect(user.add_role('employee')).to be_truthy
+        expect(user.has_role?('employee')).to be_truthy
+      end
+    end
+
+    context 'when an invalid role is added' do
+      it 'returns false and adds an error message' do
+        expect(user.add_role('invalid_role')).to be_falsey
+        expect(user.has_role?('invalid_role')).to be_falsey
+        expect(user.errors[:roles]).to include('Invalid role: invalid_role')
+      end
+    end
+  end
+
 end

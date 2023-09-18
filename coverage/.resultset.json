@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/thinei/Documents/workspace/hris_user_service/auth_microservice/spec/models/role_spec.rb": {
+      "/Users/thinei/Documents/workspace/1hris_microservice/auth_microservice/spec/models/role_spec.rb": {
         "lines": [
           1,
           null,
@@ -35,7 +35,7 @@
           null
         ]
       },
-      "/Users/thinei/Documents/workspace/hris_user_service/auth_microservice/spec/rails_helper.rb": {
+      "/Users/thinei/Documents/workspace/1hris_microservice/auth_microservice/spec/rails_helper.rb": {
         "lines": [
           null,
           1,
@@ -113,7 +113,7 @@
           null
         ]
       },
-      "/Users/thinei/Documents/workspace/hris_user_service/auth_microservice/config/environment.rb": {
+      "/Users/thinei/Documents/workspace/1hris_microservice/auth_microservice/config/environment.rb": {
         "lines": [
           null,
           1,
@@ -122,7 +122,7 @@
           1
         ]
       },
-      "/Users/thinei/Documents/workspace/hris_user_service/auth_microservice/config/application.rb": {
+      "/Users/thinei/Documents/workspace/1hris_microservice/auth_microservice/config/application.rb": {
         "lines": [
           1,
           null,
@@ -161,14 +161,14 @@
           1,
           null,
           1,
-          null,
-          null,
+          1,
+          1,
           null,
           null,
           null
         ]
       },
-      "/Users/thinei/Documents/workspace/hris_user_service/auth_microservice/config/boot.rb": {
+      "/Users/thinei/Documents/workspace/1hris_microservice/auth_microservice/config/boot.rb": {
         "lines": [
           1,
           null,
@@ -176,7 +176,7 @@
           1
         ]
       },
-      "/Users/thinei/Documents/workspace/hris_user_service/auth_microservice/lib/middleware/catch_rack_errors.rb": {
+      "/Users/thinei/Documents/workspace/1hris_microservice/auth_microservice/lib/middleware/catch_rack_errors.rb": {
         "lines": [
           1,
           1,
@@ -205,7 +205,7 @@
           null
         ]
       },
-      "/Users/thinei/Documents/workspace/hris_user_service/auth_microservice/config/environments/test.rb": {
+      "/Users/thinei/Documents/workspace/1hris_microservice/auth_microservice/config/environments/test.rb": {
         "lines": [
           1,
           null,
@@ -269,7 +269,7 @@
           null
         ]
       },
-      "/Users/thinei/Documents/workspace/hris_user_service/auth_microservice/config/initializers/cors.rb": {
+      "/Users/thinei/Documents/workspace/1hris_microservice/auth_microservice/config/initializers/cors.rb": {
         "lines": [
           null,
           null,
@@ -290,7 +290,7 @@
           null
         ]
       },
-      "/Users/thinei/Documents/workspace/hris_user_service/auth_microservice/config/initializers/devise.rb": {
+      "/Users/thinei/Documents/workspace/1hris_microservice/auth_microservice/config/initializers/devise.rb": {
         "lines": [
           null,
           null,
@@ -624,7 +624,7 @@
           null
         ]
       },
-      "/Users/thinei/Documents/workspace/hris_user_service/auth_microservice/config/initializers/filter_parameter_logging.rb": {
+      "/Users/thinei/Documents/workspace/1hris_microservice/auth_microservice/config/initializers/filter_parameter_logging.rb": {
         "lines": [
           null,
           null,
@@ -636,7 +636,7 @@
           null
         ]
       },
-      "/Users/thinei/Documents/workspace/hris_user_service/auth_microservice/config/initializers/generators.rb": {
+      "/Users/thinei/Documents/workspace/1hris_microservice/auth_microservice/config/initializers/generators.rb": {
         "lines": [
           null,
           1,
@@ -644,7 +644,7 @@
           null
         ]
       },
-      "/Users/thinei/Documents/workspace/hris_user_service/auth_microservice/config/initializers/inflections.rb": {
+      "/Users/thinei/Documents/workspace/1hris_microservice/auth_microservice/config/initializers/inflections.rb": {
         "lines": [
           null,
           null,
@@ -664,7 +664,7 @@
           null
         ]
       },
-      "/Users/thinei/Documents/workspace/hris_user_service/auth_microservice/config/initializers/pagy.rb": {
+      "/Users/thinei/Documents/workspace/1hris_microservice/auth_microservice/config/initializers/pagy.rb": {
         "lines": [
           null,
           1,
@@ -674,7 +674,7 @@
           1
         ]
       },
-      "/Users/thinei/Documents/workspace/hris_user_service/auth_microservice/config/initializers/rolify.rb": {
+      "/Users/thinei/Documents/workspace/1hris_microservice/auth_microservice/config/initializers/rolify.rb": {
         "lines": [
           1,
           null,
@@ -688,7 +688,7 @@
           null
         ]
       },
-      "/Users/thinei/Documents/workspace/hris_user_service/auth_microservice/config/initializers/rswag_api.rb": {
+      "/Users/thinei/Documents/workspace/1hris_microservice/auth_microservice/config/initializers/rswag_api.rb": {
         "lines": [
           1,
           null,
@@ -706,7 +706,7 @@
           null
         ]
       },
-      "/Users/thinei/Documents/workspace/hris_user_service/auth_microservice/config/initializers/rswag_ui.rb": {
+      "/Users/thinei/Documents/workspace/1hris_microservice/auth_microservice/config/initializers/rswag_ui.rb": {
         "lines": [
           1,
           null,
@@ -726,7 +726,7 @@
           null
         ]
       },
-      "/Users/thinei/Documents/workspace/hris_user_service/auth_microservice/spec/factories/roles.rb": {
+      "/Users/thinei/Documents/workspace/1hris_microservice/auth_microservice/spec/factories/roles.rb": {
         "lines": [
           1,
           1,
@@ -735,18 +735,18 @@
           null
         ]
       },
-      "/Users/thinei/Documents/workspace/hris_user_service/auth_microservice/spec/factories/users.rb": {
+      "/Users/thinei/Documents/workspace/1hris_microservice/auth_microservice/spec/factories/users.rb": {
         "lines": [
           1,
           1,
-          28,
-          28,
-          29,
+          31,
+          31,
+          32,
           null,
           null
         ]
       },
-      "/Users/thinei/Documents/workspace/hris_user_service/auth_microservice/config/routes.rb": {
+      "/Users/thinei/Documents/workspace/1hris_microservice/auth_microservice/config/routes.rb": {
         "lines": [
           1,
           1,
@@ -790,53 +790,69 @@
           null
         ]
       },
-      "/Users/thinei/Documents/workspace/hris_user_service/auth_microservice/app/models/user.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          null,
-          null,
-          1,
-          1,
-          1,
-          null,
-          null,
-          null,
-          1,
-          null,
-          1,
-          16,
-          null,
-          null,
-          1,
-          120,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/thinei/Documents/workspace/hris_user_service/auth_microservice/app/models/application_record.rb": {
-        "lines": [
-          1,
-          1,
-          null
-        ]
-      },
-      "/Users/thinei/Documents/workspace/hris_user_service/auth_microservice/app/models/role.rb": {
+      "/Users/thinei/Documents/workspace/1hris_microservice/auth_microservice/app/models/user.rb": {
         "lines": [
           1,
           1,
           null,
           1,
           null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          1,
+          26,
+          24,
+          null,
+          2,
+          2,
+          null,
+          null,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          19,
+          null,
+          null,
+          1,
+          132,
+          null,
+          null
+        ]
+      },
+      "/Users/thinei/Documents/workspace/1hris_microservice/auth_microservice/app/models/application_record.rb": {
+        "lines": [
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/thinei/Documents/workspace/1hris_microservice/auth_microservice/app/models/role.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          null,
           null,
           null,
           null,
@@ -848,7 +864,7 @@
           null
         ]
       },
-      "/Users/thinei/Documents/workspace/hris_user_service/auth_microservice/spec/models/user_spec.rb": {
+      "/Users/thinei/Documents/workspace/1hris_microservice/auth_microservice/spec/models/user_spec.rb": {
         "lines": [
           1,
           null,
@@ -919,10 +935,103 @@
           null,
           null,
           null,
+          1,
+          3,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
           null
         ]
       },
-      "/Users/thinei/Documents/workspace/hris_user_service/auth_microservice/spec/policies/user_policy_spec.rb": {
+      "/Users/thinei/Documents/workspace/1hris_microservice/auth_microservice/spec/policies/application_policy_spec.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null,
+          1,
+          3,
+          3,
+          3,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          2,
+          2,
+          2,
+          null,
+          1,
+          1,
+          2,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/thinei/Documents/workspace/1hris_microservice/auth_microservice/app/policies/application_policy.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          2,
+          2,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          null,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/thinei/Documents/workspace/1hris_microservice/auth_microservice/spec/policies/user_policy_spec.rb": {
         "lines": [
           1,
           null,
@@ -944,7 +1053,7 @@
           null
         ]
       },
-      "/Users/thinei/Documents/workspace/hris_user_service/auth_microservice/app/policies/user_policy.rb": {
+      "/Users/thinei/Documents/workspace/1hris_microservice/auth_microservice/app/policies/user_policy.rb": {
         "lines": [
           1,
           1,
@@ -966,64 +1075,7 @@
           null
         ]
       },
-      "/Users/thinei/Documents/workspace/hris_user_service/auth_microservice/app/policies/application_policy.rb": {
-        "lines": [
-          null,
-          null,
-          1,
-          1,
-          null,
-          1,
-          0,
-          0,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null,
-          1,
-          1,
-          0,
-          0,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null,
-          1,
-          null,
-          1,
-          null,
-          null
-        ]
-      },
-      "/Users/thinei/Documents/workspace/hris_user_service/auth_microservice/spec/requests/api/v1/auth/registrations_spec.rb": {
+      "/Users/thinei/Documents/workspace/1hris_microservice/auth_microservice/spec/requests/api/v1/auth/registrations_spec.rb": {
         "lines": [
           1,
           null,
@@ -1100,7 +1152,7 @@
           null
         ]
       },
-      "/Users/thinei/Documents/workspace/hris_user_service/auth_microservice/spec/swagger_helper.rb": {
+      "/Users/thinei/Documents/workspace/1hris_microservice/auth_microservice/spec/swagger_helper.rb": {
         "lines": [
           null,
           null,
@@ -1192,7 +1244,7 @@
           null
         ]
       },
-      "/Users/thinei/Documents/workspace/hris_user_service/auth_microservice/spec/requests/api/v1/auth/sessions_spec.rb": {
+      "/Users/thinei/Documents/workspace/1hris_microservice/auth_microservice/spec/requests/api/v1/auth/sessions_spec.rb": {
         "lines": [
           1,
           null,
@@ -1290,20 +1342,19 @@
           1,
           null,
           1,
-          null,
           1,
           1,
           1,
           null,
           null,
-          1,
-          1,
-          null,
+          2,
           null,
           1,
           1,
           1,
           1,
+          1,
+          null,
           null,
           null,
           null,
@@ -1338,7 +1389,7 @@
           null
         ]
       },
-      "/Users/thinei/Documents/workspace/hris_user_service/auth_microservice/spec/requests/api/v1/users_spec.rb": {
+      "/Users/thinei/Documents/workspace/1hris_microservice/auth_microservice/spec/requests/api/v1/users_spec.rb": {
         "lines": [
           1,
           1,
@@ -1411,7 +1462,6 @@
           null,
           null,
           null,
-          null,
           1,
           1,
           1,
@@ -1429,6 +1479,32 @@
           null,
           null,
           1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          2,
+          2,
+          null,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
           1,
           1,
           1,
@@ -1447,30 +1523,6 @@
           1,
           1,
           1,
-          1,
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          null,
-          null,
-          2,
-          2,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
           null,
           null,
           null,
@@ -1485,11 +1537,6 @@
           1,
           1,
           1,
-          null,
-          null,
-          null,
-          null,
-          null,
           null,
           1,
           1,
@@ -1503,7 +1550,11 @@
           null,
           null,
           2,
-          2,
+          1,
+          null,
+          1,
+          null,
+          null,
           null,
           1,
           1,
@@ -1612,7 +1663,7 @@
           null
         ]
       },
-      "/Users/thinei/Documents/workspace/hris_user_service/auth_microservice/app/controllers/api/v1/auth/registrations_controller.rb": {
+      "/Users/thinei/Documents/workspace/1hris_microservice/auth_microservice/app/controllers/api/v1/auth/registrations_controller.rb": {
         "lines": [
           null,
           null,
@@ -1643,7 +1694,7 @@
           null
         ]
       },
-      "/Users/thinei/Documents/workspace/hris_user_service/auth_microservice/app/controllers/application_controller.rb": {
+      "/Users/thinei/Documents/workspace/1hris_microservice/auth_microservice/app/controllers/application_controller.rb": {
         "lines": [
           1,
           1,
@@ -1653,8 +1704,8 @@
           1,
           1,
           1,
-          15,
-          15,
+          16,
+          16,
           null,
           null,
           1,
@@ -1663,13 +1714,13 @@
           null
         ]
       },
-      "/Users/thinei/Documents/workspace/hris_user_service/auth_microservice/app/controllers/concerns/rack_sessions_fix.rb": {
+      "/Users/thinei/Documents/workspace/1hris_microservice/auth_microservice/app/controllers/concerns/rack_sessions_fix.rb": {
         "lines": [
           1,
           1,
           1,
           1,
-          3,
+          0,
           null,
           null,
           null,
@@ -1688,7 +1739,7 @@
           null
         ]
       },
-      "/Users/thinei/Documents/workspace/hris_user_service/auth_microservice/app/serializers/user_serializer.rb": {
+      "/Users/thinei/Documents/workspace/1hris_microservice/auth_microservice/app/serializers/user_serializer.rb": {
         "lines": [
           1,
           1,
@@ -1702,7 +1753,7 @@
           null
         ]
       },
-      "/Users/thinei/Documents/workspace/hris_user_service/auth_microservice/app/serializers/role_serializer.rb": {
+      "/Users/thinei/Documents/workspace/1hris_microservice/auth_microservice/app/serializers/role_serializer.rb": {
         "lines": [
           1,
           1,
@@ -1710,19 +1761,51 @@
           null
         ]
       },
-      "/Users/thinei/Documents/workspace/hris_user_service/auth_microservice/app/controllers/api/v1/auth/sessions_controller.rb": {
+      "/Users/thinei/Documents/workspace/1hris_microservice/auth_microservice/app/controllers/api/v1/auth/sessions_controller.rb": {
         "lines": [
           null,
           null,
           1,
           null,
           1,
+          1,
           null,
           1,
+          12,
+          null,
+          null,
+          1,
+          null,
           1,
           10,
-          10,
           null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null,
+          null,
+          null,
+          1,
+          2,
+          null,
+          2,
+          null,
+          2,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          2,
+          2,
           null,
           null,
           null,
@@ -1733,40 +1816,18 @@
           null,
           null,
           null,
-          1,
-          2,
-          null,
-          2,
-          null,
           2,
           null,
           null,
           1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          2,
-          1,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          2,
+          12,
           null,
           null,
           null,
           null
         ]
       },
-      "/Users/thinei/Documents/workspace/hris_user_service/auth_microservice/app/controllers/api/v1/users_controller.rb": {
+      "/Users/thinei/Documents/workspace/1hris_microservice/auth_microservice/app/controllers/api/v1/users_controller.rb": {
         "lines": [
           1,
           1,
@@ -1847,6 +1908,6 @@
         ]
       }
     },
-    "timestamp": 1694757497
+    "timestamp": 1695038252
   }
 }

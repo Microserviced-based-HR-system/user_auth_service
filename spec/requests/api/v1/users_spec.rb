@@ -69,7 +69,6 @@ RSpec.describe 'api/v1/users', type: :request do
     end
   end
 
-
   path '/api/v1/users/{id}/assign_role' do
     post 'Assign a role to a user' do
       tags 'Users'
@@ -78,34 +77,38 @@ RSpec.describe 'api/v1/users', type: :request do
       security [Bearer: {}]
       parameter name: :Authorization, in: :header, type: :string, description: 'Access Token'
       parameter name: :id, in: :path, type: :string
-
+      
       parameter name: :role, in: :body, schema: {
         type: :object,
         properties: {
-          role: {type: :string}
+          role: {type: :string, default: "employee", enum: User::ROLES}
         }
       }
 
       response '200', 'role assigned' do
         before do
-          @user = FactoryBot.create(:user)
-          @user.add_role("hr_manager")
-          @session_token = login(@user)
-        end
-  
-        let(:Authorization) do
-          "Bearer #{@session_token}"
-        end
+          @hruser = FactoryBot.create(:user)
+          @hruser.add_role("hr_manager")
+          @session_token = login(@hruser)
 
+          @user = FactoryBot.create(:user)
+        end
+        let(:Authorization) { "Bearer #{@session_token}" }
         let(:id) { @user.id }
-        let(:role) { 'hr_manager' }
+
+        let(:role) do
+          {
+            role: "employee"
+          }
+        end
 
         run_test! do
+          @user.reload # Reload the user to get the updated roles
           expect(response).to have_http_status(200)
           p response_data = JSON.parse(response.body, symbolize_names: true)
           expect(response.content_type).to eq('application/json; charset=utf-8')
-          expect(response_data[:data][:roles]).to include('hr_manager')
-          response_data = JSON.parse(response.body, symbolize_names: true)
+          expect(response_data[:data][:roles]).to include('employee')
+          expect(@user.has_role?('employee')).to be true # Verify that the role was assigned
         end
       end
 
@@ -129,10 +132,8 @@ RSpec.describe 'api/v1/users', type: :request do
           expect(response.content_type).to eq('application/json; charset=utf-8')
         end
       end
-
     end
   end
-
 
   path '/api/v1/users/{id}/remove_role' do
     delete 'Delete a role to a user' do
@@ -142,12 +143,7 @@ RSpec.describe 'api/v1/users', type: :request do
       security [Bearer: {}]
       parameter name: :Authorization, in: :header, type: :string, description: 'Access Token'
       parameter name: :id, in: :path, type: :string
-      parameter name: :role, in: :body, schema: {
-        type: :object,
-        properties: {
-          role: {type: :string}
-        }
-      }
+      parameter name: :role, in: :body, type: :string, description: 'Role to assign' , default: "employee" # Add the role parameter to the path
 
       response '200', 'Remove Role' do
         before do
@@ -161,7 +157,11 @@ RSpec.describe 'api/v1/users', type: :request do
 
 
         let(:id) { @user.id }
-        let(:role) { "recuriter" }
+        let(:role) do
+          {
+            role: "recuriter"
+          }
+        end
 
         let(:Authorization) do
           "Bearer #{@session_token}"
