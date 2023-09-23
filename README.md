@@ -64,3 +64,19 @@ mutation {
   }
 }
 ```
+
+**EKS**
+```
+eksctl create cluster -f hris_cluster.yml --dry-run
+eksctl create cluster -f hris_cluster.yml
+
+eksctl utils update-cluster-logging --enable-types=all --region=ap-southeast-1 --cluster=hris-cluster-sg --approve
+
+
+```
+
+![Alt text](<Screenshot 2023-09-23 at 5.41.20 PM.png>)
+
+```
+kubectl create -f db-secret.yaml
+```

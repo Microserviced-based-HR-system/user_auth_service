@@ -1,0 +1,44 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: authservice
+  labels:
+    app: root
+    component: authservice
+spec:
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: root
+        component: authservice
+    spec:
+      containers:
+        - name: authservice
+          image: 876708361421.dkr.ecr.ap-southeast-1.amazonaws.com/hris_user_service_app:v1
+          env:
+            - name: PGHOST
+              value: auth-service-db.cpih5nqynn3w.ap-southeast-1.rds.amazonaws.com
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: password
+            - name: DB_NAME
+              value: auth_service_stag_db
+          ports:
+            - containerPort: 3000
+              name: authservice
+          resources: # Define resource limits here
+            limits:
+              cpu: "0.5" # Limit CPU usage to 0.5 cores
+              memory: "512Mi" # Limit memory usage to 512 MiB
+            requests:
+              cpu: "0.2" # Request a minimum of 0.2 cores
+              memory: "256Mi" # Request a minimum of 256 MiB

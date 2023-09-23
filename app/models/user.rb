@@ -1,6 +1,5 @@
 class User < ApplicationRecord
   rolify
-
   include Devise::JWT::RevocationStrategies::JTIMatcher
 
   devise(

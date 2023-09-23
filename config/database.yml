@@ -85,8 +85,10 @@ test:
 
 staging:
   <<: *default
-  database: <%= ENV['PGDBNAME'] %>_staging
+  database: auth_service_stag_db
 
 production:
   <<: *default
-  database: <%= ENV['PGDBNAME'] %>_production
+  database: auth_service_stag_db
+
+

@@ -38,7 +38,7 @@ class Api::V1::UsersController < ApplicationController
   def authorize_and_perform_action(action)
     authorize current_user
     user = find_user
-    role_name = user_params[:role]
+    role_name = params[:role]
 
     if user&.send("#{action}_role", role_name)
       render_success("Role '#{role_name}' #{action}ed.", serialized_user(user))
@@ -74,6 +74,6 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def user_params
-    params.permit(:id, :role, :username)
+    params.permit(:id, :username)
   end
 end

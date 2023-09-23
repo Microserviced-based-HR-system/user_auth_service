@@ -9,10 +9,10 @@ class UserPolicy < ApplicationPolicy
   end
 
   def assign_role?
-    @user.has_role?("hr_manager")
+    @user.has_any_role?("hr_manager", "administrator")
   end
 
   def remove_role?
-    @user.has_role?("hr_manager")
+    @user.has_any_role?("hr_manager", "administrator")
   end
 end
