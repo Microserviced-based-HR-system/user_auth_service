@@ -3,7 +3,8 @@ class UserPolicy < ApplicationPolicy
 
   def initialize(user, record)
     raise Pundit::NotAuthorizedError, "You are not authorized to perform this action." unless user
-    @user   = user
+
+    @user = user
     @record = record
   end
 
@@ -14,5 +15,4 @@ class UserPolicy < ApplicationPolicy
   def remove_role?
     @user.has_role?("hr_manager")
   end
-
 end

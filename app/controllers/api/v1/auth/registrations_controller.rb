@@ -12,16 +12,14 @@ class Api::V1::Auth::RegistrationsController < Devise::RegistrationsController
 
     if user.save
       render json: {
-        code: 200,
-        message: 'Signed up successfully.',
-        data: UserSerializer.new(user).serializable_hash[:data][:attributes]
-      }
+               code: 200,
+               message: "Signed up successfully.",
+               data: UserSerializer.new(user).serializable_hash[:data][:attributes],
+             }
     else
       render json: {
-        message: "User couldn't be created successfully. #{user.errors.full_messages.to_sentence}"
+        message: "User couldn't be created successfully. #{user.errors.full_messages.to_sentence}",
       }, status: :unprocessable_entity
     end
   end
-
-
 end

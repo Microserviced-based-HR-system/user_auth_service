@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.configure do |config|
   # Specify a root folder where Swagger JSON files are generated
   # NOTE: If you're using the rswag-api to serve API descriptions, you'll need
   # to ensure that it's configured to serve Swagger from the same folder
-  config.swagger_root = Rails.root.join('swagger').to_s
+  config.swagger_root = Rails.root.join("swagger").to_s
 
   # Define one or more Swagger documents and provide global metadata for each one
   # When you run the 'rswag:specs:swaggerize' rake task, the complete Swagger will
@@ -15,23 +15,23 @@ RSpec.configure do |config|
   # document below. You can override this behavior by adding a swagger_doc tag to the
   # the root example_group in your specs, e.g. describe '...', swagger_doc: 'v2/swagger.json'
   config.swagger_docs = {
-    'v1/swagger.yaml' => {
+    "v1/swagger.yaml" => {
       # openapi: '3.0.1',
-      swagger: '2.0',
+      swagger: "2.0",
       info: {
-        title: 'API V1',
-        version: 'v1'
+        title: "API V1",
+        version: "v1",
       },
       paths: {},
       servers: [
         {
-          url: 'http://{defaultHost}',
+          url: "http://{defaultHost}",
           variables: {
             defaultHost: {
-              default: '127.0.0.1:3001'
-            }
-          }
-        }
+              default: "127.0.0.1:3001",
+            },
+          },
+        },
       ],
       components: {
         schemas: {
@@ -43,41 +43,41 @@ RSpec.configure do |config|
                 items: {
                   type: :object,
                   properties: {
-                    type: {type: :string,
-                           description: 'type of error'},
-                    message: {type: :string, nullable: true}
+                    type: { type: :string,
+                            description: "type of error" },
+                    message: { type: :string, nullable: true },
                   },
-                  required: %w(type message)
+                  required: %w[type message],
                 },
               },
-              status: {type: :integer}
+              status: { type: :integer },
             },
-            required: %w(errors status)
+            required: %w[errors status],
           },
           user: {
             type: :object,
             properties: {
-              id: {type: :string},
-              username: {type: :string},
-              email: {type: :string},
-              password: {type: :string},
-              roles: {type: :array}
-          
-            },
-            required: %w(id username email password)
-          }
+              id: { type: :string },
+              username: { type: :string },
+              email: { type: :string },
+              password: { type: :string },
+              roles: { type: :array },
 
-        }
+            },
+            required: %w[id username email password],
+          },
+
+        },
       },
       securityDefinitions: {
         Bearer: {
-          description: '...',
+          description: "...",
           type: :apiKey,
-          name: 'Authorization',
-          in: :header
-        }
-      }
-    }
+          name: "Authorization",
+          in: :header,
+        },
+      },
+    },
   }
 
   # Specify the format of the output Swagger file when running 'rswag:specs:swaggerize'.

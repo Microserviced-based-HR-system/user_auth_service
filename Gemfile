@@ -14,7 +14,7 @@ gem "devise-jwt"
 gem 'warden-jwt_auth', '~> 0.6.0'
 gem "jsonapi-serializer"
 gem "rswag"
-gem 'pagy', '~> 6.0' 
+gem 'pagy', '~> 6.0'
 gem 'graphql'
 gem 'graphiql-rails', group: :development
 
@@ -44,5 +44,5 @@ gem "sprockets-rails", "~> 3.4"
 gem "pundit", "~> 2.3"
 
 gem "brakeman", "~> 6.0", group: :development
-
 gem "bundler-audit", "~> 0.9.1"
+gem "rubocop", "~> 1.56"
