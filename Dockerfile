@@ -21,6 +21,10 @@ RUN bundle install --jobs 20 --retry 5
 # Copy over our application code
 ADD . $APP_HOME
 
+# Set our environment variables
+ENV RAILS_ENV staging 
+ENV RAILS_LOG_TO_STDOUT true 
+#ensures our rails logs will be exposed from the container (useful for debugging!)
 
 # Configure endpoint.
 COPY /entrypoint.sh /usr/bin/

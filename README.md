@@ -79,4 +79,11 @@ eksctl utils update-cluster-logging --enable-types=all --region=ap-southeast-1 -
 
 ```
 kubectl create -f db-secret.yaml
+
+kubectl create -f deployment.yaml
+
+kubectl apply -f deployment.yaml
+
+kubectl get pods
+
 ```

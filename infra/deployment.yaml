@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: authservice
@@ -8,6 +8,10 @@ metadata:
 spec:
   strategy:
     type: Recreate
+  selector:  # Add this selector field
+    matchLabels:
+      app: root
+      component: authservice
   template:
     metadata:
       labels:
@@ -23,12 +27,12 @@ spec:
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
-                  name: db-secret
+                  name: db-creds
                   key: username
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: db-secret
+                  name: db-creds
                   key: password
             - name: DB_NAME
               value: auth_service_stag_db
