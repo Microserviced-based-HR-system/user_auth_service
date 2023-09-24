@@ -90,7 +90,7 @@ kubectl get pods
 
 kubectl describe pod authservice-69cc56589c-2dcjt
 
-kubectl delete deployment authservice
+kubectl delete deployment authservice-deployment
 
 kubectl exec -it authservice-69cc56589c-6zqdb -- /bin/bash
 

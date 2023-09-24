@@ -40,6 +40,7 @@ spec:
                   key: password
             - name: DB_NAME
               value: auth_service_stag_db
+
           ports:
             - containerPort: 3000
               name: authservice
