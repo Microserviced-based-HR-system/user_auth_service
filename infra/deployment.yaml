@@ -1,23 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: authservice
-  labels:
-    app: root
-    component: authservice
+  name: authservice-deployment
 spec:
-  strategy:
-    type: Recreate
-  selector:  # Add this selector field
+  replicas: 2
+  selector:
     matchLabels:
-      app: root
-      component: authservice
+      app: authservice
   template:
     metadata:
       labels:
-        app: root
-        component: authservice
+        app: authservice
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/arch
+                operator: In
+                values:
+                - amd64
+                - arm64
       containers:
         - name: authservice
           image: 876708361421.dkr.ecr.ap-southeast-1.amazonaws.com/hris_user_service_app:v1

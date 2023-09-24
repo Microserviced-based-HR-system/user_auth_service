@@ -1,4 +1,4 @@
-name: RSpec Tests and ECR Deployment
+name: UnitTest and ECR Deployment
 on:
   push:
     branches: [ "develop" ,"eks_deployment"]
