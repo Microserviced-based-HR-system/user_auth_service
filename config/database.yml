@@ -85,10 +85,10 @@ test:
 
 staging:
   <<: *default
-  database: auth_service_stag_db
+  database: <%= ENV.fetch("PGDBNAME") %>
 
 production:
   <<: *default
-  database: auth_service_stag_db
+  database: <%= ENV.fetch("PGDBNAME") %>
 
 

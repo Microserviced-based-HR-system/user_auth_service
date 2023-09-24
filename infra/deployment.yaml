@@ -26,6 +26,8 @@ spec:
         - name: authservice
           image: 876708361421.dkr.ecr.ap-southeast-1.amazonaws.com/hris_user_service_app:v1
           env:
+            - name: SECRET_KEY_BASE
+              value: c112d8b0ec0786d0f8ef1b5bb31daf43
             - name: PGHOST
               value: auth-service-db.cpih5nqynn3w.ap-southeast-1.rds.amazonaws.com
             - name: POSTGRES_USER
@@ -38,8 +40,8 @@ spec:
                 secretKeyRef:
                   name: db-creds
                   key: password
-            - name: DB_NAME
-              value: auth_service_stag_db
+            - name: PGDBNAME
+              value: auth-service-db
 
           ports:
             - containerPort: 3000
