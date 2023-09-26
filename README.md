@@ -6,7 +6,7 @@ application up and running.
 Things you may want to cover:
 
 - API Documentaion at:
-- http://127.0.0.1:3001/api-docs/index.html
+- http://127.0.0.1:3000/api-docs/index.html
 
 **Swaggerize**
 ```
