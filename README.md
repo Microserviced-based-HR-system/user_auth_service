@@ -94,7 +94,8 @@ kubectl delete deployment auth-service-deployment
 
 kubectl exec -it authservice-deployment-6b8f569bf7-97bg8 -- /bin/bash
 
-kubectl exec -it auth-service-58d87b74c8-pxh66 -- /bin/bash
+kubectl exec -it auth-service-58d87b74c8-brkk4 -- /bin/bash
+bundle exec rake db:seed
 
 ```
 

@@ -10,7 +10,7 @@ spec:
     - name: http
       port: 80
       protocol: TCP
-      targetPort: 3000
+      targetPort: 3001
   type: LoadBalancer
   selector:
     app: auth-service
@@ -37,7 +37,7 @@ spec:
           imagePullPolicy: Always
           ports:
             - name: http
-              containerPort: 3000
+              containerPort: 3001
               protocol: TCP
           envFrom:
           - configMapRef:
