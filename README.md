@@ -80,7 +80,7 @@ eksctl utils update-cluster-logging --enable-types=all --region=ap-southeast-1 -
 ```
 kubectl create -f db-secret.yaml
 
-kubectl create namespace authservice
+kubectl create namespace auth-service
 
 kubectl create -f deployment.yaml
 
@@ -90,11 +90,14 @@ kubectl get pods
 
 kubectl describe pod authservice-69cc56589c-2dcjt
 
-kubectl delete deployment authservice-deployment
+kubectl delete deployment auth-service-deployment
 
-kubectl exec -it authservice-69cc56589c-6zqdb -- /bin/bash
+kubectl exec -it authservice-deployment-6b8f569bf7-97bg8 -- /bin/bash
+
+kubectl exec -it auth-service-58d87b74c8-pxh66 -- /bin/bash
 
 ```
 
 https://joachim8675309.medium.com/building-eks-with-eksctl-799eeb3b0efd
 https://dev.to/michaellalatkovic/deploying-on-kubernetes-part-1-a-rails-api-backend-2ojl
+https://www.stacksimplify.com/aws-eks/kubernetes-storage/aws-eks-storage-with-aws-rds-database/

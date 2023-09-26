@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: env-configmap
+data:
+  APP_NAME: hris
+  RAILS_ENV: staging
+  PGDBNAME: auth_service_sg
+  PGHOST: auth-service-db.cpih5nqynn3w.ap-southeast-1.rds.amazonaws.com
+  SECRET_KEY_BASE: c112d8b0ec0786d0f8ef1b5bb31daf43
+  AWS_ECR_ACCOUNT_URL: 876708361421.dkr.ecr.ap-southeast-1.amazonaws.com

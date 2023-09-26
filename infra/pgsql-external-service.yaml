@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgresql
+spec:
+  type: ExternalName
+  externalName: auth-service-db.cpih5nqynn3w.ap-southeast-1.rds.amazonaws.com

@@ -1,8 +1,11 @@
 apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
-
+availabilityZones:
+  - ap-southeast-1c
+  - ap-southeast-1a
+  - ap-southeast-1b
 metadata:
-  name: eks-fargate-hris-app-cluster-sg
+  name: farget-hris-app-cluster-sg
   region: ap-southeast-1 # AWS Singapore region
 
 # Node groups
@@ -28,13 +31,9 @@ nodeGroups:
 
 # Fargate profiles
 fargateProfiles:
-  - name: hris-app-profile
+  - name: auth-service-profile
     selectors:
-      - namespace: hris-app-namespace
-    tags:
-      env: staging
-
-
+      - namespace: auth-service
 
 # CloudWatch
 cloudWatch:

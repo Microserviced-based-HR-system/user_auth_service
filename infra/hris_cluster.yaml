@@ -1,3 +1,8 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: auth-service-sg
+---
 apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 
