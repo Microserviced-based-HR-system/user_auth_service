@@ -41,7 +41,7 @@ spec:
                   name: auth-service-db
                   key: password
           image: 876708361421.dkr.ecr.ap-southeast-1.amazonaws.com/hris_user_service_app:v1
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - name: http
               containerPort: 3000

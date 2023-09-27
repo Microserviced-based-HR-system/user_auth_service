@@ -2,10 +2,10 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: auth-service
 resources:
-- namespace.yaml
-- secrets.yaml
-- configMap.yaml
-- serviceAccount.yaml
-- service.yaml
-- service-pgsql.yaml
-- deployment.yaml
+- 1-namespace.yaml
+- 2-secrets.yaml
+- 3-configMap.yaml
+- 4-serviceAccount.yaml
+- 5-service.yaml
+- 6-service-pgsql.yaml
+- 7-deployment.yaml

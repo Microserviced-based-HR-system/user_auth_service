@@ -92,13 +92,19 @@ kubectl describe pod authservice-69cc56589c-2dcjt
 
 kubectl delete deployment auth-service-deployment
 
-kubectl exec -it authservice-deployment-6b8f569bf7-97bg8 -- /bin/bash
+kubectl exec -it auth-service-6b98746799-4bdw5 -n auth-service -- /bin/bash
 
-kubectl exec -it auth-service-58d87b74c8-brkk4 -- /bin/bash
 bundle exec rake db:seed
+
+https://www.eksworkshop.com/docs/introduction/setup/your-account/using-eksctl
+
+kubectl -n auth-service exec -it \
+  deployment/auth-service -- curl auth-service.auth-service.svc/api/v1/users | jq .
 
 ```
 
 https://joachim8675309.medium.com/building-eks-with-eksctl-799eeb3b0efd
 https://dev.to/michaellalatkovic/deploying-on-kubernetes-part-1-a-rails-api-backend-2ojl
 https://www.stacksimplify.com/aws-eks/kubernetes-storage/aws-eks-storage-with-aws-rds-database/
+https://archive.eksworkshop.com/beginner/130_exposing-service/exposing/
+https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html
