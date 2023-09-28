@@ -5,7 +5,7 @@ echo "$(date) - Checking for POSTGRES (host: $PGHOST, dbname: $PGDBNAME) connect
 
 # If the database exists, migrate. Otherwise setup (create and migrate)
 bundle exec rake db:migrate 2>/dev/null || 
-bundle exec rake db:create db:migrate 
+bundle exec rake db:create db:migrate
 echo "Database has been created & migrated!"
 
 # # Wait for database to be ready

@@ -1,7 +1,7 @@
-name: RSpec Tests and ECR Deployment
+name: UnitTest and ECR Deployment
 on:
   push:
-    branches: [ "develop" ]
+    branches: [ "develop" ,"eks_deployment"]
   pull_request:
     branches: [ "main" ]
 jobs:
@@ -13,7 +13,7 @@ jobs:
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: ""
-          POSTGRES_DB: postgres
+          POSTGRES_DB: auth_service_test
         ports:
           - 5432:5432
         # needed because the postgres container does not provide a healthcheck
@@ -44,7 +44,9 @@ jobs:
       TZ: "Asia/Singapore"
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Check out code
+        uses: actions/checkout@v2
+      
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -53,11 +55,16 @@ jobs:
           # runs 'bundle install' and caches installed gems automatically
           bundler-cache: true
 
+      - name: Set up environment variables
+        run: |
+          echo "RAILS_ENV=test" >> .env
+       
+
       - name: Create DB
         run: |
           bin/rails db:prepare
           
-      - name: Run tests
+      - name: Run RSpec tests
         env:
           DEVISE_JWT_SECRET_KEY: ${{ secrets.devise_jwt_secret_key }}
         run: |
@@ -68,26 +75,18 @@ jobs:
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
- # ECR build and push job
-  ecr-deployment:
-    name: Build and Push Image to ECR
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v2
-
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-southeast-1
-
+  
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
+      # ECR build and push job
       - name: Build, tag, and push image to Amazon ECR
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}

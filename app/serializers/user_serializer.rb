@@ -1,8 +1,6 @@
 class UserSerializer
   include JSONAPI::Serializer
-  attributes :id, :email, :username
-
-  has_many :roles, serializer: RoleSerializer
+  attributes :id, :email, :username, :roles
 
   attributes :roles do |obj|
     obj.roles.pluck(:name)

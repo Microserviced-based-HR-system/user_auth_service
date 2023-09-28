@@ -1,0 +1,4 @@
+checks:
+  - All
+skip_checks:
+  - MassAssignment

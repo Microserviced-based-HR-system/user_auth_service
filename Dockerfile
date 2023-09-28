@@ -21,9 +21,18 @@ RUN bundle install --jobs 20 --retry 5
 # Copy over our application code
 ADD . $APP_HOME
 
+# Set our environment variables
+ENV RAILS_ENV staging 
+ENV RAILS_LOG_TO_STDOUT true 
+#ensures our rails logs will be exposed from the container (useful for debugging!)
 
-# Configure endpoint.
-COPY /entrypoint.sh /usr/bin/
-RUN chmod +x /usr/bin/entrypoint.sh
-ENTRYPOINT ["entrypoint.sh"]
-EXPOSE 3001
+EXPOSE 3000
+
+# Start the puma server
+CMD bundle exec puma -p 3000
+
+# # Configure endpoint.
+# COPY /entrypoint.sh /usr/bin/
+# RUN chmod +x /usr/bin/entrypoint.sh
+# ENTRYPOINT ["entrypoint.sh"]
+# EXPOSE 3001

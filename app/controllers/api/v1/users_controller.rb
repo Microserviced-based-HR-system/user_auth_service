@@ -8,8 +8,12 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show
-    @user = find_user
-    render_success("User Details", serialized_user(@user))
+    begin
+      @user = find_user
+      render_success("User Details", serialized_user(@user))
+    rescue ActiveRecord::RecordNotFound
+      render_error("User not found", :not_found)
+    end
   end
 
   def assign_role
@@ -22,7 +26,7 @@ class Api::V1::UsersController < ApplicationController
 
   def update_username
     new_username = params[:username]
-    if current_user && current_user.update(username: new_username)
+    if current_user&.update(username: new_username)
       render_success("Username updated to '#{new_username}'.", serialized_user(current_user))
     else
       render_error("Username update failed.")
@@ -34,20 +38,20 @@ class Api::V1::UsersController < ApplicationController
   def authorize_and_perform_action(action)
     authorize current_user
     user = find_user
-    role_name = user_params[:role]
+    role_name = params[:role]
 
-    if user && user.send("#{action}_role", role_name)
+    if user&.send("#{action}_role", role_name)
       render_success("Role '#{role_name}' #{action}ed.", serialized_user(user))
     else
-      render_error("Failed.")
+      render_error("Invalid role name, failed.")
     end
   end
 
-  def render_success(message, data, pagy =nil)
+  def render_success(message, data, pagy = nil)
     response_data = {
       code: 200,
       message: message,
-      data: data
+      data: data,
     }
     response_data[:pagy] = pagy if pagy
     render json: response_data
@@ -70,7 +74,6 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def user_params
-    params.permit(:id, :role, :username)
+    params.permit(:id, :username)
   end
-
 end

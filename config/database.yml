@@ -85,8 +85,10 @@ test:
 
 staging:
   <<: *default
-  database: <%= ENV['PGDBNAME'] %>_staging
+  database: <%= ENV.fetch("PGDBNAME") %>
 
 production:
   <<: *default
-  database: <%= ENV['PGDBNAME'] %>_production
+  database: <%= ENV.fetch("PGDBNAME") %>
+
+

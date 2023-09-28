@@ -26,7 +26,7 @@
                   "properties": {
                     "email": {
                       "type": "string",
-                      "default": "admin@email.com"
+                      "default": "employee@email.com"
                     },
                     "password": {
                       "type": "string",
@@ -34,7 +34,7 @@
                     },
                     "username": {
                       "type": "string",
-                      "default": "admin"
+                      "default": "emp1"
                     }
                   },
                   "required": [
@@ -45,7 +45,7 @@
                 },
                 "role": {
                   "type": "string",
-                  "default": "admin"
+                  "default": "employee"
                 }
               }
             }
@@ -82,7 +82,7 @@
                   "properties": {
                     "email": {
                       "type": "string",
-                      "default": "admin@email.com"
+                      "default": "hrisadmin@example.com"
                     },
                     "password": {
                       "type": "string",
@@ -133,10 +133,10 @@
         ],
         "responses": {
           "200": {
-            "description": "successful"
+            "description": "Logout successful"
           },
           "401": {
-            "description": "successful"
+            "description": "Token invalid or expired"
           }
         }
       }
@@ -257,7 +257,15 @@
               "type": "object",
               "properties": {
                 "role": {
-                  "type": "string"
+                  "type": "string",
+                  "default": "employee",
+                  "enum": [
+                    "user",
+                    "administrator",
+                    "hr_manager",
+                    "employee",
+                    "candidate"
+                  ]
                 }
               }
             }
@@ -304,14 +312,9 @@
           {
             "name": "role",
             "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "role": {
-                  "type": "string"
-                }
-              }
-            }
+            "type": "string",
+            "description": "Role to assign",
+            "default": "employee"
           }
         ],
         "responses": {
@@ -378,7 +381,7 @@
       "url": "http://{defaultHost}",
       "variables": {
         "defaultHost": {
-          "default": "127.0.0.1:3001"
+          "default": "127.0.0.1:3000"
         }
       }
     }
