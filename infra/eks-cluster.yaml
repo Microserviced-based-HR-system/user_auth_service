@@ -7,13 +7,13 @@ availabilityZones:
 - ap-southeast-1c
 
 metadata:
-  name: hris-workshop
+  name: hris-k8s
   region: ap-southeast-1
   version: '1.25'
   tags:
-    karpenter.sh/discovery: hris-workshop
-    created-by: eks-workshop-v2
-    env: hris-workshop
+    karpenter.sh/discovery: hris-k8s
+    created-by: group1-nus
+    env: hris-k8s
 
 iam:
   withOIDC: true
@@ -31,11 +31,11 @@ addons:
   resolveConflicts: overwrite
 
 managedNodeGroups:
-- name: default
-  desiredCapacity: 3
-  minSize: 3
-  maxSize: 6
-  instanceType: m5.large
+- name: ng-hris 
+  desiredCapacity: 2
+  minSize: 2
+  maxSize: 4
+  instanceType: t3.medium
   privateNetworking: true
   releaseVersion: 1.25.6-20230304
   labels:

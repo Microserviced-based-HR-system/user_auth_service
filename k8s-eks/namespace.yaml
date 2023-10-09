@@ -3,4 +3,4 @@ kind: Namespace
 metadata:
   name: auth-service
   labels:
-    app.kubernetes.io/created-by: hris_k8s
+    app.kubernetes.io/created-by: group1-nus
