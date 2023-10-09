@@ -1,8 +1,8 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: auth-service
-  namespace: auth-service
+  name: ui
+  namespace: ui
   labels:
     app.kubernetes.io/created-by: group1-nus
   annotations:
@@ -15,10 +15,10 @@ spec:
   rules:
   - http:
       paths:
-      - path: /auth
+      - path: /
         pathType: Prefix
         backend:
           service:
-            name: auth-service
+            name: ui
             port:
               number: 80

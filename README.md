@@ -108,3 +108,5 @@ https://dev.to/michaellalatkovic/deploying-on-kubernetes-part-1-a-rails-api-back
 https://www.stacksimplify.com/aws-eks/kubernetes-storage/aws-eks-storage-with-aws-rds-database/
 https://archive.eksworkshop.com/beginner/130_exposing-service/exposing/
 https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html
+https://www.middlewareinventory.com/blog/internal-external-load-balancer-aws-eks
+https://blog.saeloun.com/2023/03/21/setup-kubernetes-dashboard-eks/

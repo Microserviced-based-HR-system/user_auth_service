@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-service
+  labels:
+    app.kubernetes.io/created-by: group1-nus
+    app.kubernetes.io/type: app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: auth-service
+      app.kubernetes.io/instance: auth-service
+      app.kubernetes.io/component: service
+  template:
+    metadata:
+      annotations:
+        prometheus.io/path: /metrics
+        prometheus.io/port: "3000"
+        prometheus.io/scrape: "true"
+      labels:
+        app.kubernetes.io/name: auth-service
+        app.kubernetes.io/instance: auth-service
+        app.kubernetes.io/component: service
+        app.kubernetes.io/created-by: group1-nus
+    spec:
+      nodeSelector:
+        eks.amazonaws.com/nodegroup: ng-hris
+      containers:
+      - name: auth-service
+        envFrom:
+        - configMapRef:
+            name: auth-service
+        env:
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: auth-service-db
+              key: username
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: auth-service-db
+              key: password
+        image: 876708361421.dkr.ecr.ap-southeast-1.amazonaws.com/hris_user_service_app:v1
+        imagePullPolicy: Always
+        ports:
+        - name: http
+          containerPort: 3000
+          protocol: TCP
+        resources: {}
+        # requests:
+        #   memory: "256Mi"
+        #   cpu: "500m"
+        # limits:
+        #   memory: "1Gi"
+        #   cpu: "1"
+
