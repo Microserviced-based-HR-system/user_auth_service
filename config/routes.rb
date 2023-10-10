@@ -16,9 +16,11 @@ Rails.application.routes.draw do
         member do
           post "assign_role"
           delete "remove_role"
+          post "get_by_email"
         end
 
         patch "update_username", on: :collection
+        post "get_by_email", on: :collection
       end
     end
   end

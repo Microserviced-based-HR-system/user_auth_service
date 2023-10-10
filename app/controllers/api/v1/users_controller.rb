@@ -33,6 +33,19 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
+  def get_by_email
+    begin
+      @user = find_user
+      if @user
+        render_success("User Found", serialized_user(@user))
+      else
+        render_error("User not found by email", :not_found)
+      end
+    rescue ActiveRecord::RecordNotFound
+      render_error("User not found", :not_found)
+    end
+  end
+
   private
 
   def authorize_and_perform_action(action)
@@ -62,7 +75,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def find_user
-    User.find(user_params[:id])
+    User.find_by(id: user_params[:id]) || User.find_by(email: user_params[:email])
   end
 
   def serialized_user(user)
@@ -74,6 +87,6 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def user_params
-    params.permit(:id, :username)
+    params.permit(:id, :username, :email)
   end
 end

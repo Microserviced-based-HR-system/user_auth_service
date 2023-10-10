@@ -8,6 +8,8 @@ metadata:
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
+    # Ensure that the rewrite-target annotation is set to "/" for React routing.
+    alb.ingress.kubernetes.io/rewrite-target: /
     # HIGHLIGHT
     alb.ingress.kubernetes.io/group.name: hris-app-group
 spec:

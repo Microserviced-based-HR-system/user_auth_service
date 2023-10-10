@@ -245,6 +245,58 @@ RSpec.describe "api/v1/users", type: :request do
     end
   end
 
+  path "/api/v1/users/get_by_email" do
+    post "Get user by email" do
+      tags "Users"
+      consumes "application/json"
+      produces "application/json"
+
+      security [Bearer: {}]
+      parameter name: :Authorization, in: :header, type: :string, description: "Access Token"
+      parameter name: :user, in: :body, schema: {
+        type: :object,
+        properties: {
+          email: { type: :string },
+        },
+      }
+      response "200", "User Found" do
+        before do
+          @user = FactoryBot.create(:user)
+          @session_token = login(@user)
+        end
+
+        let(:Authorization) do
+          "Bearer #{@session_token}"
+        end
+
+        let(:user) { { email: @user.email } }
+
+        run_test! do
+          # p response_data = JSON.parse(response.body, symbolize_names: true)
+          expect(response).to have_http_status(200)
+        end
+      end
+
+      response "404", "User not found by email" do
+        before do
+          @user = FactoryBot.create(:user)
+          @session_token = login(@user)
+        end
+
+        let(:Authorization) do
+          "Bearer #{@session_token}"
+        end
+
+        let(:user) { { email: "" } } # Invalid username
+
+        run_test! do
+          expect(response).to have_http_status(404)
+          expect(response.body).to include("User not found by email")
+        end
+      end
+    end
+  end
+
   def login(user)
     post "/api/v1/login", params: {
                             user: {
