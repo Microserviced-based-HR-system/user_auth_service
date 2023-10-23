@@ -50,6 +50,16 @@ spec:
         port:
           number: 80
         host: ui
+  # - match:
+  #   - uri:
+  #       prefix: "/candidate-service"
+  #   rewrite:
+  #     uri: "/"
+  #   route:
+  #   - destination:
+  #       port:
+  #         number: 80
+  #       host: candidate-service
 
   # - match:
   #   - uri:
