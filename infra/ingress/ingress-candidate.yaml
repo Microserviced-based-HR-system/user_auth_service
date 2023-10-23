@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: candidate-service
+  namespace: candidate-service
+  labels:
+    app.kubernetes.io/created-by: group1-nus
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    # HIGHLIGHT
+    alb.ingress.kubernetes.io/group.name: hris-app-group
+spec:
+  ingressClassName: alb
+  rules:
+  - http:
+      paths:
+      - path: /candidate-service
+        pathType: Prefix
+        backend:
+          service:
+            name: candidate-service
+            port:
+              number: 8081
