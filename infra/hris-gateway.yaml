@@ -1,5 +1,5 @@
 #
-# A simple ingress gateway for the hris app.
+# A simple istio gateway for the hris app.
 #
 
 apiVersion: networking.istio.io/v1alpha3
@@ -11,19 +11,16 @@ spec:
     istio: ingressgateway # use istio default controller
   servers:
   - port:
-      number: 443
-      name: https-443
-      protocol: HTTPS
+      number: 80
+      name: http
+      protocol: HTTP
     hosts:
     - "*"
-    tls:
-      mode: SIMPLE
-      credentialName: ingress-tls-cert
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: hris
+  name: hris-app
 spec:
   hosts:
   - "*"
@@ -34,7 +31,7 @@ spec:
     - uri:
         prefix: "/auth-service"
     rewrite:
-      uri: "/api-docs"
+      uri: "/"
     route:
     - destination:
         port:
@@ -50,24 +47,33 @@ spec:
         port:
           number: 80
         host: ui
-  # - match:
-  #   - uri:
-  #       prefix: "/candidate-service"
-  #   rewrite:
-  #     uri: "/"
-  #   route:
-  #   - destination:
-  #       port:
-  #         number: 80
-  #       host: candidate-service
-
-  # - match:
-  #   - uri:
-  #       prefix: "/serviceB"
-  #   rewrite:
-  #     uri: "/dashboard"
-  #   route:
-  #   - destination:
-  #       port:
-  #         number: 3000
-  #       host: auth-service
+  - match:
+    - uri:
+        prefix: "/candidate-service"
+    rewrite:
+      uri: "/"
+    route:
+    - destination:
+        port:
+          number: 80
+        host: candidate-service
+  - match:
+    - uri:
+        prefix: "/employee-service"
+    rewrite:
+      uri: "/"
+    route:
+    - destination:
+        port:
+          number: 80
+        host: employee-service
+  - match:
+    - uri:
+        prefix: "/job-service"
+    rewrite:
+      uri: "/"
+    route:
+    - destination:
+        port:
+          number: 80
+        host: job-service

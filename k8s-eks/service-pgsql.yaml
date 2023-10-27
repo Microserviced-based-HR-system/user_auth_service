@@ -4,7 +4,7 @@ metadata:
   name: postgresql
 spec:
   type: ExternalName
-  externalName: hris-auth-service-db.cpih5nqynn3w.ap-southeast-1.rds.amazonaws.com
+  externalName: auth-service-db.cpih5nqynn3w.ap-southeast-1.rds.amazonaws.com
   selector:
     app.kubernetes.io/name: auth-service
     app.kubernetes.io/instance: auth-service
